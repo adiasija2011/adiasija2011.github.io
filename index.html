@@ -127,6 +127,29 @@ a:hover { color: var(--accent-hover); }
 .nav-toggle[aria-expanded="true"] .icon-hamburger { display: none; }
 .nav-toggle[aria-expanded="true"] .icon-close { display: inline; }
 
+/* ===== NAVBAR RIGHT & THEME TOGGLE ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  color: var(--secondary);
+  line-height: 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* ===== HERO ===== */
 .hero {
@@ -530,30 +553,6 @@ a:hover { color: var(--accent-hover); }
   .research-body { font-size: 15px; }
 }
 
-/* ===== NAVBAR RIGHT & THEME TOGGLE ===== */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.theme-toggle {
-  background: none;
-  border: 1px solid var(--rule);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  color: var(--secondary);
-  line-height: 0;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.theme-toggle:hover {
-  color: var(--ink);
-  border-color: var(--muted);
-}
-.theme-toggle .icon-sun { display: none; }
-[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
-[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-
 /* ===== DARK MODE ===== */
 [data-theme="dark"] {
   --bg: #0f0f0f;
@@ -647,7 +646,7 @@ a:hover { color: var(--accent-hover); }
   </p>
 
   <div class="hero-contact">
-    <a href="#" id="email-link" onclick="return false;" aria-label="Email">
+    <a href="javascript:void(0)" id="email-link" aria-label="Email">
       <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       <span id="email-text">adiasija [at] gmail [dot] com</span>
     </a>
@@ -970,12 +969,15 @@ a:hover { color: var(--accent-hover); }
       /* Show/hide sections */
       secs.forEach(function(s){
         var section = s.getAttribute('data-section');
-        if (f === 'all' || section === 'all' || section === f) {
+        if (f === 'all' || section === f) {
           s.classList.remove('hidden');
         } else {
           s.classList.add('hidden');
         }
       });
+
+      /* Scroll to top so filtered content is visible */
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       /* Close mobile menu after filter click */
       closeMenu();
