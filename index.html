@@ -10,8 +10,7 @@
 <meta property="og:description" content="AI Engineer. Computer vision for medical imaging, NLP systems, and applied ML research.">
 <meta property="og:image" content="https://adiasija2011.github.io/photo.jpg">
 <meta property="og:url" content="https://adiasija2011.github.io">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" id="meta-theme-color">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -47,6 +46,7 @@ body {
   font-size: 16.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
@@ -127,8 +127,6 @@ a:hover { color: var(--accent-hover); }
 .nav-toggle[aria-expanded="true"] .icon-hamburger { display: none; }
 .nav-toggle[aria-expanded="true"] .icon-close { display: inline; }
 
-/* ===== MOBILE EDUCATION ROWS (hidden on desktop) ===== */
-.tl-edu-row { display: none; }
 
 /* ===== HERO ===== */
 .hero {
@@ -463,7 +461,6 @@ a:hover { color: var(--accent-hover); }
   .navbar-inner {
     padding: 0 20px;
     height: 56px;
-    flex-direction: row;
     position: relative;
   }
   .nav-links {
@@ -489,11 +486,11 @@ a:hover { color: var(--accent-hover); }
     text-align: left;
     border-radius: var(--radius-sm);
   }
+  [data-theme="dark"] .nav-links {
+    background: rgba(15,15,15,0.95);
+  }
 
-  /* Mobile education rows */
-  .tl-edu-row { display: flex; }
-  .tl-edu-label { display: none; }
-
+  /* Hero */
   .hero { padding: 48px 0 40px; }
   .hero-intro {
     flex-direction: column;
@@ -514,7 +511,7 @@ a:hover { color: var(--accent-hover); }
   .card-title { font-size: 18px; }
   .card-body { font-size: 15px; }
 
-  /* Timeline: collapse for phone */
+  /* Timeline: collapse for mobile */
   .timeline-spine { left: 20px; }
   .tl-card {
     text-align: left;
@@ -525,6 +522,7 @@ a:hover { color: var(--accent-hover); }
   }
   .tl-dot { left: 20px !important; }
   .tl-edu-bar { display: none; }
+  .tl-edu-label { display: none; }
 
   .pub-title { font-size: 15px; }
   .pub-authors { font-size: 13px; }
@@ -532,33 +530,52 @@ a:hover { color: var(--accent-hover); }
   .research-body { font-size: 15px; }
 }
 
-/* ===== DARK MODE ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f0f0f;
-    --surface: #1a1a1a;
-    --ink: #f0f0f0;
-    --body: #d1d5db;
-    --secondary: #9ca3af;
-    --muted: #6b7280;
-    --faint: #374151;
-    --rule: #27272a;
-    --accent: #60a5fa;
-    --accent-soft: #1e3a5f;
-    --accent-hover: #93bbfd;
-    --tag-bg: #1f2937;
-    --tag-border: #374151;
-  }
-  .navbar {
-    background: rgba(15,15,15,0.88);
-  }
-  .nav-links {
-    background: rgba(15,15,15,0.95);
-  }
-  .tl-card { background: var(--bg); }
-  .tl-dot { border-color: var(--bg); }
-  .hero-photo { box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.4); }
+/* ===== NAVBAR RIGHT & THEME TOGGLE ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  color: var(--secondary);
+  line-height: 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --ink: #f0f0f0;
+  --body: #d1d5db;
+  --secondary: #9ca3af;
+  --muted: #6b7280;
+  --faint: #374151;
+  --rule: #27272a;
+  --accent: #60a5fa;
+  --accent-soft: #1e3a5f;
+  --accent-hover: #93bbfd;
+  --tag-bg: #1f2937;
+  --tag-border: #374151;
+}
+[data-theme="dark"] .navbar {
+  background: rgba(15,15,15,0.88);
+}
+[data-theme="dark"] .tl-card { background: var(--bg); }
+[data-theme="dark"] .tl-dot { border-color: var(--bg); }
+[data-theme="dark"] .hero-photo { box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.4); }
 
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
@@ -569,6 +586,13 @@ a:hover { color: var(--accent-hover); }
   }
 }
 </style>
+<script>
+(function(){
+  var t = localStorage.getItem('theme');
+  if (t) document.documentElement.setAttribute('data-theme', t);
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+})();
+</script>
 </head>
 <body>
 
@@ -576,17 +600,23 @@ a:hover { color: var(--accent-hover); }
 <nav class="navbar" aria-label="Site navigation">
   <div class="navbar-inner">
     <span class="navbar-name">Adi Asija</span>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
-      <svg class="icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="nav-links" id="nav-links">
-      <button class="active" data-filter="all" aria-current="page">all</button>
-      <button data-filter="experience">experience</button>
-      <button data-filter="projects">projects</button>
-      <button data-filter="publications">publications</button>
-      <button data-filter="research">research</button>
-      <button data-filter="education">education</button>
+    <div class="navbar-right">
+      <div class="nav-links" id="nav-links">
+        <button class="active" data-filter="all" aria-current="page">all</button>
+        <button data-filter="experience">experience</button>
+        <button data-filter="projects">projects</button>
+        <button data-filter="publications">publications</button>
+        <button data-filter="research">research</button>
+        <button data-filter="education">education</button>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <svg class="icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -604,16 +634,16 @@ a:hover { color: var(--accent-hover); }
   </div>
 
   <p class="hero-bio">
-    I am currently building clinical decision support tools at <a href="https://www.visilant.org" target="_blank" rel="noopener">Visilant</a>. Day to day, that means training image classifiers, fine-tuning VLMs like MedGemma, and figuring out what it takes for a model to be something a clinician actually trusts.
+    I ship clinical AI at <a href="https://www.visilant.org" target="_blank" rel="noopener">Visilant</a>, deploying vision-language models (MedGemma) and medical image classifiers that clinicians rely on for diagnostic decisions. My work spans the full stack—from model fine-tuning to the product challenge of earning trust in high-stakes healthcare environments.
   </p>
   <p class="hero-bio">
-    I graduated from Johns Hopkins with a Masters in Electrical and Computer Engineering in May 2025, where I worked on retrieval systems, text-to-SQL for genomic databases, and benchmarks for web agents.
+    I hold an M.S. in Electrical and Computer Engineering from Johns Hopkins (2025), where I built retrieval systems, text-to-SQL pipelines for genomic databases, and evaluation frameworks for autonomous web agents.
   </p>
   <p class="hero-bio">
-    I collaborate with <a href="https://www.cs.jhu.edu/~noa/" target="_blank">Nicholas Andrews</a> at HLTCOE on robust language identification, and am getting increasingly interested in reasoning models for predicting what happens next (elections, drug interactions).
+    Currently collaborating with <a href="https://www.cs.jhu.edu/~noa/" target="_blank" rel="noopener">Nicholas Andrews</a> at HLTCOE on robust multilingual language identification. I'm also exploring reasoning models for sequential prediction, applying structured forecasting to domains ranging from electoral outcomes to pharmacological interactions.
   </p>
   <p class="hero-bio">
-    Always happy to talk about models that work in the real world, tennis, or whatever else.
+    Open to discussing production ML, the gap between benchmarks and real-world deployment, or tennis.
   </p>
 
   <div class="hero-contact">
@@ -694,25 +724,6 @@ a:hover { color: var(--accent-hover); }
         <div class="tl-card-title">IIIT Delhi</div>
         <div class="tl-card-role">Research Assistant</div>
         <div class="tl-card-years">2022 – 2023</div>
-      </div>
-    </div>
-
-    <!-- Mobile-only education cards -->
-    <div class="tl-row tl-edu-row">
-      <div class="tl-dot" style="background:var(--accent-soft);"></div>
-      <div class="tl-card" style="border-color:var(--accent-soft);">
-        <div class="tl-card-title">Johns Hopkins University</div>
-        <div class="tl-card-role">M.S. Electrical &amp; Computer Engineering</div>
-        <div class="tl-card-years">2023 – 2025</div>
-      </div>
-    </div>
-
-    <div class="tl-row tl-edu-row">
-      <div class="tl-dot" style="background:var(--faint);"></div>
-      <div class="tl-card">
-        <div class="tl-card-title">VIT, India</div>
-        <div class="tl-card-role">B.Tech Electronics &amp; Communication Engineering</div>
-        <div class="tl-card-years">2019 – 2023</div>
       </div>
     </div>
 
@@ -999,7 +1010,7 @@ a:hover { color: var(--accent-hover); }
     var tl = document.querySelector('.timeline');
     if(!tl) return;
     var tlTop = tl.getBoundingClientRect().top + window.scrollY;
-    var rows = tl.querySelectorAll('.tl-row:not(.tl-edu-row)');
+    var rows = tl.querySelectorAll('.tl-row');
     var bars = tl.querySelectorAll('.tl-edu-bar');
     bars.forEach(function(bar){
       var s = parseInt(bar.dataset.spanStart);
@@ -1034,6 +1045,28 @@ a:hover { color: var(--accent-hover); }
   el.addEventListener('click', function(){
     var addr = parts[0] + '@' + parts[1] + '.' + parts[2];
     window.location.href = 'mailto:' + addr;
+  });
+
+  /* ===== Theme toggle ===== */
+  var themeToggle = document.getElementById('theme-toggle');
+  var metaThemeColor = document.getElementById('meta-theme-color');
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f0f0f' : '#ffffff');
+    }
+  }
+
+  // Sync meta theme-color with initial theme set by head script
+  if (document.documentElement.getAttribute('data-theme') === 'dark' && metaThemeColor) {
+    metaThemeColor.setAttribute('content', '#0f0f0f');
+  }
+
+  themeToggle.addEventListener('click', function() {
+    var current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
   });
 })();
 </script>
