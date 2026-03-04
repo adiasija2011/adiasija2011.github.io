@@ -216,7 +216,7 @@ a:hover { color: var(--accent-hover); }
   padding: 56px 0;
   border-top: 1px solid var(--rule);
 }
-.section.hidden { display: none; }
+.section.hidden, .hero.hidden { display: none; }
 .section-label {
   font-size: 12px;
   font-weight: 600;
@@ -951,6 +951,7 @@ a:hover { color: var(--accent-hover); }
   /* ===== Nav filtering ===== */
   var btns = document.querySelectorAll('.nav-links button');
   var secs = document.querySelectorAll('.section[data-section]');
+  var hero = document.querySelector('.hero');
   var navToggle = document.querySelector('.nav-toggle');
   var navLinks = document.getElementById('nav-links');
 
@@ -965,6 +966,13 @@ a:hover { color: var(--accent-hover); }
       });
       this.classList.add('active');
       this.setAttribute('aria-current', 'page');
+
+      /* Show/hide hero */
+      if (f === 'all') {
+        hero.classList.remove('hidden');
+      } else {
+        hero.classList.add('hidden');
+      }
 
       /* Show/hide sections */
       secs.forEach(function(s){
