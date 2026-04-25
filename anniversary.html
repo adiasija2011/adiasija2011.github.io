@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Riya — Happy First Anniversary</title>
+<meta name="description" content="A little something for Riya. Happy first anniversary.">
+<meta name="theme-color" content="#FAF6F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14110F" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="For Riya — Happy First Anniversary">
+<meta property="og:description" content="A little something for Riya. Happy first anniversary.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23C2185B' d='M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="anniversary/frame1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="anniversary/frame2.jpg">
+<link rel="preload" as="image" href="anniversary/frame3.jpg">
+<style>
+  :root {
+    --bg: #FAF6F2;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #3F3936;
+    --muted: #8B807A;
+    --accent: #C2185B;
+    --accent-soft: #FCE4EC;
+    --rule: #EAE4DE;
+    --shadow: 0 12px 32px -12px rgba(40, 20, 30, 0.18);
+    --shadow-sm: 0 4px 12px -6px rgba(40, 20, 30, 0.14);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-emp: cubic-bezier(0.83, 0, 0.17, 1);
+    --tap-clear: rgba(0,0,0,0);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14110F;
+      --surface: #1E1A18;
+      --ink: #F5F0EA;
+      --body: #C9C0B9;
+      --muted: #8B807A;
+      --accent: #FF8FA3;
+      --accent-soft: #3A1E2A;
+      --rule: #2A2522;
+      --shadow: 0 12px 36px -12px rgba(0,0,0,0.55);
+      --shadow-sm: 0 4px 12px -6px rgba(0,0,0,0.45);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  html { scroll-behavior: smooth; height: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+
+  .stage {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding:
+      calc(env(safe-area-inset-top) + 24px)
+      calc(env(safe-area-inset-right) + 20px)
+      calc(env(safe-area-inset-bottom) + 96px)
+      calc(env(safe-area-inset-left) + 20px);
+    isolation: isolate;
+  }
+
+  /* Floating heart particles ----------------------------------------- */
+  .hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    opacity: 0;
+    animation: float linear infinite;
+  }
+  .heart svg { width: 100%; height: 100%; display: block; }
+  @keyframes float {
+    0%   { transform: translateY(0) rotate(0); opacity: 0; }
+    10%  { opacity: 0.5; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-110dvh) rotate(15deg); opacity: 0; }
+  }
+
+  /* Eyebrow "FOR RIYA" ----------------------------------------------- */
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rise 0.9s var(--ease-out) 0.15s forwards;
+  }
+  .eyebrow .accent { color: var(--accent); }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Photo card (Polaroid) -------------------------------------------- */
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 12px 12px 36px;
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    width: min(78vw, 280px);
+    aspect-ratio: 305 / 320; /* card frame = photo + caption strip */
+    opacity: 0;
+    transform: scale(0.96);
+    animation: card-in 0.7s var(--ease-out) 0.4s forwards;
+  }
+  @keyframes card-in {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 305 / 258;
+    background: #1a1a1a;
+    overflow: hidden;
+    border-radius: 1px;
+  }
+
+  .frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 280ms var(--ease-out);
+    will-change: opacity;
+  }
+  .frame.is-active { opacity: 1; }
+
+  /* Countdown overlay ------------------------------------------------- */
+  .countdown {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(20, 12, 16, 0.42);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+  }
+  .countdown-num {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 500;
+    font-size: clamp(72px, 24vw, 120px);
+    line-height: 1;
+    color: #FFFFFF;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+    opacity: 0;
+    transform: scale(1.06);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  }
+  .countdown-num.is-on {
+    animation: count-pulse 1s var(--ease-out) forwards;
+  }
+  @keyframes count-pulse {
+    0%   { opacity: 0; transform: scale(1.10); }
+    18%  { opacity: 1; transform: scale(1.00); }
+    82%  { opacity: 1; transform: scale(1.00); }
+    100% { opacity: 0; transform: scale(0.96); }
+  }
+
+  /* Frame index badge "1 / 3" ---------------------------------------- */
+  .badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.92);
+    background: rgba(20, 12, 16, 0.45);
+    padding: 4px 8px;
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transition: opacity 240ms var(--ease-out);
+  }
+  .badge.is-on { opacity: 1; }
+
+  /* Caption strip below photo (the "white" of the polaroid) ---------- */
+  .card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    width: 28px;
+    height: 1px;
+    background: var(--rule);
+    transform: translateX(-50%);
+  }
+
+  /* Reveal section --------------------------------------------------- */
+  .reveal {
+    margin-top: 48px;
+    text-align: center;
+    max-width: 520px;
+  }
+  .reveal-title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(40px, 11vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .reveal-title .name {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .reveal-title .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .reveal-sub {
+    margin-top: 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(16px, 4.4vw, 20px);
+    color: var(--body);
+    letter-spacing: -0.01em;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .reveal-rule {
+    width: 32px;
+    height: 1px;
+    background: var(--rule);
+    margin: 22px auto 0;
+    opacity: 0;
+    transition: opacity 600ms var(--ease-out) 800ms;
+  }
+  .reveal-signature {
+    margin-top: 18px;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 600ms var(--ease-out) 1000ms;
+  }
+  .reveal.is-on .word { animation: word-rise 0.7s var(--ease-out) forwards; }
+  .reveal.is-on .reveal-sub { animation: word-rise 0.7s var(--ease-out) 0.6s forwards; }
+  .reveal.is-on .reveal-rule,
+  .reveal.is-on .reveal-signature { opacity: 1; }
+  @keyframes word-rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Confetti hearts at reveal ---------------------------------------- */
+  .confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+  .confetti-heart {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    color: var(--accent);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .confetti-heart svg { width: 100%; height: 100%; display: block; }
+
+  /* Replay button ---------------------------------------------------- */
+  .replay {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom) + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 100px;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    color: var(--body);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transition: opacity 600ms var(--ease-out) 1200ms, transform 200ms var(--ease-out), background 200ms;
+    -webkit-tap-highlight-color: var(--tap-clear);
+    touch-action: manipulation;
+    z-index: 10;
+  }
+  .replay:hover { transform: translateX(-50%) translateY(-1px); }
+  .replay:active { transform: translateX(-50%) translateY(0); background: var(--accent-soft); }
+  .replay.is-on { opacity: 1; }
+  .replay svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+  /* Reduced motion: collapse everything to instant fade-ins ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.001ms !important;
+    }
+    .heart { display: none; }
+    .confetti-heart { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<main class="stage">
+  <div class="eyebrow">For <span class="accent">Riya</span></div>
+
+  <div class="card" id="card" aria-label="Photo strip animation">
+    <div class="card-inner">
+      <img class="frame" id="frame1" src="anniversary/frame1.jpg" alt="" decoding="async">
+      <img class="frame" id="frame2" src="anniversary/frame2.jpg" alt="" decoding="async">
+      <img class="frame" id="frame3" src="anniversary/frame3.jpg" alt="" decoding="async">
+      <div class="countdown" id="countdown">
+        <span class="countdown-num" id="countdown-num"></span>
+      </div>
+      <div class="badge" id="badge"><span id="badge-num">1</span> / 3</div>
+    </div>
+  </div>
+
+  <section class="reveal" id="reveal" aria-live="polite">
+    <h1 class="reveal-title">
+      <span class="word">Happy</span>
+      <span class="word">first</span>
+      <span class="word">anniversary,</span>
+      <span class="word name">Riya.</span>
+    </h1>
+    <p class="reveal-sub">Here&rsquo;s to many more.</p>
+    <div class="reveal-rule" aria-hidden="true"></div>
+    <div class="reveal-signature">— With all my love</div>
+  </section>
+</main>
+
+<button class="replay" id="replay" type="button" aria-label="Replay animation">
+  <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+  Replay
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ==== Floating background hearts ==== */
+  const heartsRoot = document.getElementById('hearts');
+  const isMobile = matchMedia('(max-width: 560px)').matches;
+  const heartCount = isMobile ? 6 : 12;
+  const heartSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>';
+  for (let i = 0; i < heartCount; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = heartSvg;
+    h.style.left = (Math.random() * 100) + '%';
+    h.style.animationDuration = (12 + Math.random() * 10) + 's';
+    h.style.animationDelay = (Math.random() * 14) + 's';
+    h.style.opacity = (0.10 + Math.random() * 0.18).toFixed(2);
+    h.style.transform = 'scale(' + (0.6 + Math.random() * 0.6).toFixed(2) + ')';
+    heartsRoot.appendChild(h);
+  }
+
+  /* ==== Stage state machine ==== */
+  const frames = [
+    document.getElementById('frame1'),
+    document.getElementById('frame2'),
+    document.getElementById('frame3'),
+  ];
+  const countdown = document.getElementById('countdown');
+  const countdownNum = document.getElementById('countdown-num');
+  const badge = document.getElementById('badge');
+  const badgeNum = document.getElementById('badge-num');
+  const reveal = document.getElementById('reveal');
+  const replayBtn = document.getElementById('replay');
+
+  const timers = [];
+  function delay(ms) { return new Promise(r => timers.push(setTimeout(r, ms))); }
+  function clearAll() { timers.forEach(clearTimeout); timers.length = 0; }
+
+  function showFrame(i) {
+    frames.forEach((f, idx) => f.classList.toggle('is-active', idx === i));
+    badgeNum.textContent = (i + 1);
+  }
+
+  async function runCountdown() {
+    countdown.style.display = 'grid';
+    for (const n of [3, 2, 1]) {
+      countdownNum.textContent = n;
+      countdownNum.classList.remove('is-on');
+      void countdownNum.offsetWidth; // restart animation
+      countdownNum.classList.add('is-on');
+      await delay(1000);
+    }
+    countdown.style.display = 'none';
+  }
+
+  async function runCycle(loops) {
+    badge.classList.add('is-on');
+    for (let l = 0; l < loops; l++) {
+      for (let i = 0; i < frames.length; i++) {
+        showFrame(i);
+        await delay(1000);
+      }
+    }
+    badge.classList.remove('is-on');
+  }
+
+  function burstConfetti() {
+    const root = document.getElementById('confetti');
+    root.innerHTML = '';
+    const N = isMobile ? 18 : 28;
+    const cardRect = document.getElementById('card').getBoundingClientRect();
+    const ox = cardRect.left + cardRect.width / 2;
+    const oy = cardRect.top + cardRect.height / 2;
+    for (let i = 0; i < N; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-heart';
+      c.innerHTML = heartSvg;
+      const angle = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.4;
+      const dist = 120 + Math.random() * 220;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist - 60; // slight upward bias
+      const size = 8 + Math.random() * 14;
+      c.style.width = size + 'px';
+      c.style.height = size + 'px';
+      c.style.left = ox + 'px';
+      c.style.top = oy + 'px';
+      c.style.transform = 'translate(-50%, -50%) scale(0.4)';
+      c.animate(
+        [
+          { transform: 'translate(-50%, -50%) scale(0.4) rotate(0deg)', opacity: 0 },
+          { transform: 'translate(calc(-50% + ' + (dx * 0.4) + 'px), calc(-50% + ' + (dy * 0.4) + 'px)) scale(1) rotate(' + (Math.random() * 60 - 30) + 'deg)', opacity: 1, offset: 0.2 },
+          { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + (dy + 200) + 'px)) scale(0.9) rotate(' + (Math.random() * 120 - 60) + 'deg)', opacity: 0 },
+        ],
+        { duration: 1700 + Math.random() * 600, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+      );
+    }
+  }
+
+  function startReveal() {
+    showFrame(2); // hold last frame
+    reveal.classList.add('is-on');
+    burstConfetti();
+    replayBtn.classList.add('is-on');
+  }
+
+  async function play() {
+    // Reset
+    clearAll();
+    reveal.classList.remove('is-on');
+    replayBtn.classList.remove('is-on');
+    document.querySelectorAll('.reveal .word').forEach(w => {
+      w.style.animation = 'none';
+      void w.offsetWidth;
+      w.style.animation = '';
+    });
+    showFrame(0);
+    countdown.style.display = 'grid';
+    countdownNum.classList.remove('is-on');
+
+    await delay(700);            // intro breath
+    await runCountdown();        // 3 ... 2 ... 1
+    await runCycle(2);           // photos cycle twice
+    startReveal();
+  }
+
+  replayBtn.addEventListener('click', play);
+
+  // Auto-play on load. Wait one frame so initial styles apply.
+  requestAnimationFrame(() => requestAnimationFrame(play));
+})();
+</script>
+
+</body>
+</html>
