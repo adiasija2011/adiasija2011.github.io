@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johns Hopkins Global Sight Initiative — Vision for All</title>
+<meta name="description" content="Johns Hopkins Global Sight Initiative (JHGSI): translational innovation to eliminate avoidable blindness and prevent visual impairment. Ten-plus technology programs across the full care continuum.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='%23002D72' stroke-width='7'/><circle cx='50' cy='50' r='11' fill='%23002D72'/></svg>">
+<meta property="og:title" content="Johns Hopkins Global Sight Initiative — Vision for All">
+<meta property="og:description" content="Translational innovation to eliminate avoidable blindness and prevent visual impairment.">
+<meta name="theme-color" content="#002D72">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --paper:#f5f6f8;        /* cool clinical off-white, faint blue bias */
+  --paper-2:#eef1f5;      /* recessed band */
+  --card:#ffffff;
+  --ink:#0e1420;          /* blue-black */
+  --body:#444b57;         /* cool grey */
+  --muted:#727b89;
+  --faint:#aab2bd;
+  --rule:#e2e5ea;
+  --rule-soft:#edeff3;
+  --blue:#002d72;         /* Johns Hopkins */
+  --blue-2:#2f6fed;       /* optical accent / links */
+  --blue-ink:#0a1f4d;     /* deep band ground */
+  --blue-soft:#e9eefb;
+  --gold:#c7a343;         /* heritage — hairlines only */
+  --on-dark:#eaeef6;
+  --on-dark-mut:#9db0d4;
+  --on-dark-faint:#5e73a3;
+  --measure:42rem;        /* prose reading width */
+  --wide:70rem;           /* wide sections */
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--blue);color:#fff}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--body);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a{color:var(--blue-2);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{font-family:'Newsreader',Georgia,serif;color:var(--ink);font-weight:500;letter-spacing:-.01em;text-wrap:balance}
+img{max-width:100%}
+
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+.wrap{max-width:var(--wide);margin:0 auto;padding:0 40px}
+.prose{max-width:var(--measure)}
+.mono{font-family:'JetBrains Mono',monospace}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--blue-2);display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.eyebrow.on-dark{color:var(--on-dark-mut)}
+.eyebrow.on-dark::before{background:var(--gold)}
+.lead{font-size:20px;line-height:1.6;color:var(--body)}
+
+/* section rhythm */
+section{padding:96px 0;position:relative}
+.band-recess{background:var(--paper-2)}
+.band-dark{background:var(--blue-ink);color:var(--on-dark)}
+.band-dark h1,.band-dark h2,.band-dark h3{color:#fff}
+.sec-head{margin-bottom:56px}
+.sec-head h2{font-size:clamp(28px,3.6vw,42px);line-height:1.12;margin-top:16px}
+.sec-head p{margin-top:18px;color:var(--muted);font-size:17.5px}
+.band-dark .sec-head p{color:var(--on-dark-mut)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:sticky;top:0;z-index:50;background:rgba(245,246,248,.82);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--rule)}
+.nav-in{max-width:var(--wide);margin:0 auto;padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
+.brand .mark{flex-shrink:0}
+.brand b{font-family:'Newsreader',serif;font-weight:600;font-size:17px;letter-spacing:-.01em;line-height:1.1}
+.brand span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;
+  padding:10px 18px;border-radius:999px;transition:transform .15s ease,box-shadow .2s ease,background .2s ease}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 1px 2px rgba(0,45,114,.3)}
+.btn-primary:hover{background:#013a94;text-decoration:none;transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,45,114,.28)}
+.btn-ghost{border:1px solid var(--rule);color:var(--ink);background:var(--card)}
+.btn-ghost:hover{border-color:var(--faint);text-decoration:none}
+.btn-gold{background:var(--gold);color:#241c00}
+.btn-gold:hover{background:#d8b752;text-decoration:none;transform:translateY(-1px)}
+.btn-outline-dark{border:1px solid var(--on-dark-faint);color:var(--on-dark)}
+.btn-outline-dark:hover{border-color:var(--on-dark-mut);text-decoration:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:120px 0 104px;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(38px,6vw,72px);line-height:1.04;letter-spacing:-.025em;margin:26px 0 0;
+  max-width:16ch;font-weight:500}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero .mission{margin-top:32px;max-width:38rem;font-size:20px;line-height:1.62;color:var(--body)}
+.hero .mission b{color:var(--ink);font-weight:600}
+.hero-cta{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.hero-strip{display:flex;gap:0;margin-top:72px;border-top:1px solid var(--rule);flex-wrap:wrap}
+.hs-item{padding:26px 40px 4px 0;margin-right:40px;border-right:1px solid var(--rule-soft)}
+.hs-item:last-child{border-right:none}
+.hs-num{font-family:'Newsreader',serif;font-size:40px;font-weight:500;color:var(--blue);line-height:1;letter-spacing:-.02em}
+.hs-num small{font-size:18px;color:var(--ink)}
+.hs-lab{font-size:13.5px;color:var(--muted);margin-top:8px;max-width:22ch;line-height:1.4}
+
+/* ============================================================
+   STAKES
+   ============================================================ */
+.stakes-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.stat-huge{padding:0 48px 0 0}
+.stat-huge:last-child{padding:0 0 0 48px;border-left:1px solid var(--rule)}
+.stat-huge .n{font-family:'Newsreader',serif;font-size:clamp(64px,10vw,120px);font-weight:500;
+  color:var(--ink);line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat-huge .u{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue-2);margin-top:14px}
+.stat-huge p{margin-top:14px;color:var(--body);font-size:17px;max-width:26ch}
+.stat-huge.alt .n{color:var(--blue)}
+.drivers{margin-top:80px;border-top:1px solid var(--rule);padding-top:48px}
+.drivers > .lbl{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+.driver-row{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.driver{display:flex;flex-direction:column;gap:12px}
+.driver .ic{color:var(--blue)}
+.driver h3{font-family:'Inter',sans-serif;font-size:15.5px;font-weight:600;color:var(--ink);letter-spacing:0}
+
+/* ============================================================
+   VISION (dark band)
+   ============================================================ */
+.vision .wrap{max-width:54rem}
+.vision-quote{font-family:'Newsreader',serif;font-size:clamp(26px,3.6vw,40px);line-height:1.28;
+  color:#fff;font-weight:400;letter-spacing:-.01em;margin-top:26px}
+.vision-quote .hl{color:#fff;background:linear-gradient(transparent 62%,rgba(199,163,67,.35) 62%)}
+.vision-foot{margin-top:34px;color:var(--on-dark-mut);font-size:15px;font-family:'JetBrains Mono',monospace;
+  letter-spacing:.04em}
+
+/* ============================================================
+   PILLARS
+   ============================================================ */
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.pillar{background:var(--card);padding:38px 34px;display:flex;flex-direction:column;gap:16px;
+  transition:background .25s ease}
+.pillar:hover{background:#fbfcfe}
+.pillar-top{display:flex;align-items:center;gap:16px}
+.pillar-idx{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--gold);
+  border:1px solid var(--rule);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.pillar .ic{color:var(--blue);margin-left:auto}
+.pillar h3{font-size:20px;line-height:1.15;letter-spacing:-.01em;font-weight:600}
+.pillar p{font-size:15.5px;line-height:1.6;color:var(--body)}
+
+/* ============================================================
+   PROGRAMS (portfolio grid)
+   ============================================================ */
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prog{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:30px 30px 32px;
+  display:flex;flex-direction:column;transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.prog:hover{box-shadow:0 14px 40px -18px rgba(10,31,77,.28);transform:translateY(-3px);border-color:#d3d9e2}
+.prog-head{display:flex;align-items:flex-start;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--rule-soft)}
+.prog-ic{width:44px;height:44px;border-radius:11px;background:var(--blue-soft);color:var(--blue);
+  display:grid;place-items:center;flex-shrink:0}
+.prog-idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-bottom:3px}
+.prog-head h3{font-size:19px;line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.prog-rows{display:flex;flex-direction:column;gap:15px;margin-top:20px}
+.prow{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:baseline}
+.prow .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding-top:2px}
+.prow .v{font-size:15px;line-height:1.5;color:var(--body)}
+.prow.solve .k{color:var(--blue-2)}
+.prow.solve .v{color:var(--ink);font-weight:500}
+.prow.shift{border-top:1px dashed var(--rule);padding-top:14px;margin-top:2px}
+.prow.shift .k{color:var(--gold)}
+.prow.shift .v{font-style:italic;font-family:'Newsreader',serif;font-size:16px;color:var(--blue-ink)}
+
+/* ============================================================
+   JOURNEY
+   ============================================================ */
+.journey-scroll{overflow-x:auto;padding-bottom:8px;margin:0 -40px;padding-left:40px;padding-right:40px}
+.journey-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(180px,1fr);gap:0;min-width:min-content}
+.jstep{position:relative;padding:0 22px 0 0}
+.jstep .node{display:flex;align-items:center;gap:0;margin-bottom:22px}
+.jstep .dot{width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--blue-2);
+  flex-shrink:0;z-index:2}
+.jstep.impact .dot{background:var(--blue);border-color:var(--blue)}
+.jstep .line{height:2px;background:var(--rule);flex:1}
+.jstep:last-child .line{background:transparent}
+.jstep .ji{color:var(--blue);margin-bottom:14px}
+.jstep h3{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;color:var(--ink);
+  letter-spacing:-.005em;line-height:1.25;text-transform:uppercase;min-height:2.4em}
+.jstep.impact h3{color:var(--blue)}
+.jstep p{font-size:13px;line-height:1.5;color:var(--muted);margin-top:10px;padding-right:8px}
+.loop-note{margin-top:34px;display:flex;align-items:center;gap:14px;color:var(--blue-2);
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.04em}
+.loop-note svg{flex-shrink:0}
+
+/* ============================================================
+   PLATFORMS
+   ============================================================ */
+.plat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.plat{background:var(--card);padding:28px 26px;display:flex;flex-direction:column;gap:12px}
+.plat .ic{color:var(--blue)}
+.plat h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--ink);line-height:1.2}
+.plat p{font-size:13.5px;line-height:1.5;color:var(--muted)}
+
+/* ============================================================
+   PARTNERS
+   ============================================================ */
+.partners-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:44px 64px}
+.pgroup .phead{display:flex;align-items:center;gap:12px;padding-bottom:16px;margin-bottom:18px;
+  border-bottom:1px solid var(--rule)}
+.pgroup .phead .ic{color:var(--blue)}
+.pgroup .phead h3{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink)}
+.plist{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;color:var(--body);background:var(--card);border:1px solid var(--rule);
+  padding:6px 14px;border-radius:999px}
+
+/* ============================================================
+   CLOSING (dark ask)
+   ============================================================ */
+.closing{padding:110px 0}
+.closing .wrap{max-width:50rem;text-align:center}
+.closing h2{font-size:clamp(30px,4.4vw,52px);line-height:1.1;color:#fff}
+.closing .tagline{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.closing p{margin:26px auto 0;max-width:42rem;color:var(--on-dark-mut);font-size:18px;line-height:1.6}
+.closing-cta{display:flex;gap:14px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.crest{display:inline-flex;align-items:center;gap:14px;margin-bottom:34px;color:#fff}
+.crest .txt{text-align:left}
+.crest b{font-family:'Newsreader',serif;font-size:19px;font-weight:600;display:block;line-height:1}
+.crest span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--on-dark-mut);display:block;margin-top:4px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{padding:40px 0;border-top:1px solid var(--rule);background:var(--paper)}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot span{font-size:13px;color:var(--muted)}
+.foot .mono{font-size:12px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:900px){
+  .stakes-grid{grid-template-columns:1fr;gap:52px}
+  .stat-huge,.stat-huge:last-child{padding:0;border-left:none}
+  .driver-row{grid-template-columns:1fr 1fr;gap:32px 24px}
+  .prog-grid{grid-template-columns:1fr}
+  .plat-grid{grid-template-columns:1fr 1fr}
+  .pillars-grid{grid-template-columns:1fr}
+  .partners-grid{grid-template-columns:1fr;gap:36px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap,.nav-in{padding:0 22px}
+  section{padding:68px 0}
+  .hero{padding:80px 0 68px}
+  .nav-links{display:none}
+  .hs-item{padding:22px 24px 4px 0;margin-right:20px}
+  .hero-strip{margin-top:52px}
+  .driver-row{grid-template-columns:1fr;gap:26px}
+  .plat-grid{grid-template-columns:1fr}
+  .prow{grid-template-columns:1fr;gap:3px}
+  .prow .k{padding-top:0}
+  .journey-scroll{margin:0 -22px;padding-left:22px;padding-right:22px}
+  .journey-rail{grid-auto-columns:minmax(158px,1fr)}
+  .sec-head{margin-bottom:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <svg class="mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="15" cy="15" r="13" stroke="#002d72" stroke-width="1.4" opacity=".35"/>
+        <circle cx="15" cy="15" r="8.5" stroke="#002d72" stroke-width="1.4"/>
+        <circle cx="15" cy="15" r="3.4" fill="#002d72"/>
+      </svg>
+      <span class="txt"><b>Global Sight Initiative</b><span>Johns Hopkins</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#stakes">The Burden</a>
+      <a href="#pillars">Pillars</a>
+      <a href="#programs">Programs</a>
+      <a href="#journey">The Journey</a>
+      <a href="#partners">Partners</a>
+    </div>
+    <a class="btn btn-primary" href="#join">Partner with us</a>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <canvas class="hero-canvas" id="iris" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Johns Hopkins Global Sight Initiative</div>
+    <h1>Translational innovation to eliminate <em>avoidable blindness</em> and prevent visual impairment.</h1>
+    <p class="mission">
+      <b>Our mission:</b> unite science, technology, and global partners to find patients,
+      restore sight, replace burdensome care, and scale solutions that eliminate avoidable blindness.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#join">Join the mission &rarr;</a>
+      <a class="btn btn-ghost" href="#programs">Explore the programs</a>
+    </div>
+
+    <div class="hero-strip">
+      <div class="hs-item">
+        <div class="hs-num" data-count="2.2" data-suffix="B">0<small>B</small></div>
+        <div class="hs-lab">people live with vision impairment worldwide</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num" data-count="1" data-suffix="B">0<small>B</small></div>
+        <div class="hs-lab">could have been prevented or remains unaddressed</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num" data-count="10" data-suffix="+">0<small>+</small></div>
+        <div class="hs-lab">technology programs across the full care continuum</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== STAKES ===================== -->
+<section id="stakes">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">The Burden</div>
+      <h2>A global crisis of sight — and most of it is avoidable.</h2>
+      <p>Aging populations and rising chronic eye disease are outpacing a specialist workforce that cannot scale. The result is a treatable epidemic left unaddressed.</p>
+    </div>
+
+    <div class="stakes-grid reveal">
+      <div class="stat-huge">
+        <div class="n">2.2B</div>
+        <div class="u">Live with vision impairment</div>
+        <p>Many will never reach a specialist under today's models of care.</p>
+      </div>
+      <div class="stat-huge alt">
+        <div class="n">1B</div>
+        <div class="u">Preventable or unaddressed</div>
+        <p>Nearly half of the burden could have been prevented — or still remains untreated.</p>
+      </div>
+    </div>
+
+    <div class="drivers reveal">
+      <div class="lbl">What's driving the burden</div>
+      <div class="driver-row">
+        <div class="driver">
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/><path d="M17 11l2 2 4-4"/></svg></span>
+          <h3>Aging population</h3>
+        </div>
+        <div class="driver">
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 5h4v4"/></svg></span>
+          <h3>Rising chronic eye disease</h3>
+        </div>
+        <div class="driver">
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <h3>Access &amp; workforce gaps</h3>
+        </div>
+        <div class="driver">
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v6M18 9v6"/></svg></span>
+          <h3>High cost &amp; infrastructure barriers</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VISION (dark band) ===================== -->
+<section class="band-dark vision">
+  <div class="wrap reveal">
+    <div class="eyebrow on-dark">Transformative Potential</div>
+    <p class="vision-quote">
+      Technology-enabled solutions that <span class="hl">extend expertise</span>,
+      simplify care, improve durability, and <span class="hl">scale to population need</span> —
+      turning specialist-dependent medicine into care that reaches everyone.
+    </p>
+    <div class="vision-foot">Detect earlier · Restore faster · Treat durably · Reach further</div>
+  </div>
+</section>
+
+<!-- ===================== PILLARS ===================== -->
+<section id="pillars">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">The Strategy</div>
+      <h2>Four integrated pillars, one care continuum.</h2>
+      <p>Each pillar attacks a different failure point — from finding the patient to scaling the cure — and together they close the loop from detection to durable treatment.</p>
+    </div>
+
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-idx">01</span>
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+        </div>
+        <h3>Find patients &amp; connect to care</h3>
+        <p>AI-enabled screening, clinical decision support, referral tracking, disease monitoring, and precision prognosis.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-idx">02</span>
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        </div>
+        <h3>Democratize sight-restoring procedures</h3>
+        <p>Make cataract surgery, corneal restoration, infection treatment, and postoperative care simpler, safer, longer-lasting, and less dependent on infrastructure.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-idx">03</span>
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 5.5 5 10a5 5 0 0 1-10 0c0-4.5 5-10 5-10z"/></svg></span>
+        </div>
+        <h3>Replace burdensome chronic care</h3>
+        <p>Deliver durable therapy for glaucoma, diabetic retinal disease, AMD, myopia, and other progressive conditions to reduce or eliminate repeated visits, injections, and drops.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-idx">04</span>
+          <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 6 8 10 12 22 16 10 16 6 12 2z"/><path d="M8.5 14c-2 1-3 3-3 6 3 0 5-1 6-3M15.5 14c2 1 3 3 3 6-3 0-5-1-6-3"/></svg></span>
+        </div>
+        <h3>Validate, translate, commercialize &amp; scale</h3>
+        <p>Coordinate clinical validation, regulatory and manufacturing planning, and engagement with foundations, industry, and investors to scale impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROGRAMS ===================== -->
+<section id="programs" class="band-recess">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">The Portfolio</div>
+      <h2>Addressing the leading causes of blindness and visual impairment.</h2>
+      <p>Ten-plus technology programs spanning the full care continuum — each pairing a defined global burden with a translational solution built to change the standard of care.</p>
+    </div>
+
+    <div class="prog-grid">
+
+      <!-- 1 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM4 9h1M4 15h1M19 9h1M19 15h1M9 4v1M15 4v1M9 19v1M15 19v1"/></svg></div>
+          <div><div class="prog-idx">Program 01</div><h3>Detection, triage &amp; referral</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">2.2B people live with vision impairment; many never reach a specialist.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Specialist-dependent exams cannot scale to volume, geography, or chronicity.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">AI-enabled portable imaging, triage, referral tracking, decision support, and longitudinal monitoring.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Extends specialist-level decision support beyond the clinic.</div></div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><div class="prog-idx">Program 02</div><h3>Myopia &amp; refractive disease</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Myopia will affect 50% of the world by 2050.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Behavior change, atropine, or specialty lenses require long-term adherence.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">Scalable topical myopia treatment plus AI-enabled screening and monitoring.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Addresses a population-level epidemic before irreversible complications develop.</div></div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18" opacity=".5"/></svg></div>
+          <div><div class="prog-idx">Program 03</div><h3>Cataract</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">17M cases of blindness and 83.5M cases of MSVI globally.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Surgery requires capital equipment, training, and cost.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">Pharmacologic therapy to treat cataract; a low-cost handheld surgical device.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Makes cataract treatment simpler, cheaper, and more accessible.</div></div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 5 6 11a6 6 0 0 1-12 0c0-6 6-11 6-11z" opacity=".55"/><circle cx="12" cy="13" r="3"/></svg></div>
+          <div><div class="prog-idx">Program 04</div><h3>Corneal blindness</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Corneal infection is a major cause; 12.7M people need a transplant.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Donor scarcity, complex surgery, rejection, and intensive topical dosing.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">Synthetic tissue and simplified, non-specialist surgery; sustained anti-infective depots.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Reduces dependence on donor tissue, specialists, and adherence-intensive therapy.</div></div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 5.5 5 10a5 5 0 0 1-10 0c0-4.5 5-10 5-10z"/><path d="M12 14v3"/></svg></div>
+          <div><div class="prog-idx">Program 05</div><h3>Postoperative infection &amp; inflammation</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Tens of millions of eye surgeries; many patients least able to administer drops.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Multi-drop regimens are poorly adhered to, risking infection and inflammation.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">Drop-free, surgeon-administered, sustained antibiotic and steroid depots.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Turns postoperative pharmacotherapy from an adherence problem into controlled care.</div></div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+          <div><div class="prog-idx">Program 06</div><h3>Glaucoma prognosis &amp; treatment</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Affects 80M people; projected 112M by 2040; vision loss is irreversible.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Slow detection; drops need lifelong adherence; surgery is short-lived.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">AI-enabled prognosis, topical neuroprotection, sustained IOP lowering, and programmable surgery.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Moves glaucoma from delayed detection to prognosis, durable IOP control, and neuroprotection.</div></div>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+          <div><div class="prog-idx">Program 07</div><h3>Diabetic retinal disease</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Affects 103M adults with diabetes and rising globally.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Anti-VEGF injections require 6–12 per year for years; high cost and adherence burden.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">A one-time phototherapy implant targeting rod oxygen demand, retinal hypoxia, and VEGF signaling.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Shifts care from repeated rescue injections to a long-duration implant targeting upstream disease biology.</div></div>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="prog reveal">
+        <div class="prog-head">
+          <div class="prog-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><path d="M12 12h.01" stroke-width="2.2"/></svg></div>
+          <div><div class="prog-idx">Program 08</div><h3>Age-related macular degeneration</h3></div>
+        </div>
+        <div class="prog-rows">
+          <div class="prow"><div class="k">Burden</div><div class="v">Affects 196M people; projected 288M by 2040; leading cause of central vision loss.</div></div>
+          <div class="prow"><div class="k">Today's limits</div><div class="v">Dry AMD has limited options; wet AMD requires lifelong injections.</div></div>
+          <div class="prow solve"><div class="k">Our solution</div><div class="v">AI-designed, sustained topical retinal delivery systems.</div></div>
+          <div class="prow shift"><div class="k">The shift</div><div class="v">Replaces repeated injections with earlier, less invasive, more durable retinal therapy.</div></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== JOURNEY ===================== -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">From Bench to Bedside</div>
+      <h2>The innovation and impact journey.</h2>
+      <p>A disciplined path from unmet need to global impact — with data, outcomes, and feedback feeding back into every stage.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="journey-scroll">
+        <div class="journey-rail">
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
+            <h3>Need identification &amp; prioritization</h3>
+            <p>Global burden assessment, patient and partner input, technical feasibility.</p>
+          </div>
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-4.5 9A2 2 0 0 0 7.3 20h9.4a2 2 0 0 0 1.8-3L14 8V2"/></svg></span>
+            <h3>Discovery &amp; invention</h3>
+            <p>AI, nanomedicine, biomaterials, photonics, imaging, proteomics.</p>
+          </div>
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span>
+            <h3>Engineering &amp; prototyping</h3>
+            <p>Human-centered design, device engineering, formulation, benchtop and preclinical testing.</p>
+          </div>
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M12 4v6M8 10h8l3 8a2 2 0 0 1-1.9 2.6H6.9A2 2 0 0 1 5 18z"/><path d="M9 16h6"/></svg></span>
+            <h3>Clinical validation</h3>
+            <p>Prospective studies, real-world evidence, multisite and global care-system validation.</p>
+          </div>
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4v4l6-4v16"/><path d="M15 21V11l6 4v6z"/><path d="M6 12v0M6 16v0"/></svg></span>
+            <h3>Translation &amp; scale</h3>
+            <p>Regulatory strategy, manufacturing, quality, supply chain, cost optimization.</p>
+          </div>
+          <div class="jstep">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <h3>Implementation &amp; access</h3>
+            <p>Training, integration, reimbursement, policy, and sustainable delivery models.</p>
+          </div>
+          <div class="jstep impact">
+            <div class="node"><span class="dot"></span><span class="line"></span></div>
+            <span class="ji" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <h3>Impact</h3>
+            <p>Prevent blindness, restore sight, improve lives, empower communities.</p>
+          </div>
+        </div>
+      </div>
+      <div class="loop-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v5h-5"/></svg>
+        Continuous learning loop — data, outcomes, and feedback drive iteration and improvement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLATFORMS ===================== -->
+<section class="band-recess">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">The Engine</div>
+      <h2>Enabling platforms and capabilities.</h2>
+      <p>Shared scientific infrastructure that every program draws on — the reason a portfolio, not a single product, can move at once.</p>
+    </div>
+
+    <div class="plat-grid reveal">
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="8" height="8" rx="1.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l1.8 1.8M17.7 17.7l1.8 1.8M19.5 4.5l-1.8 1.8M6.3 17.7l-1.8 1.8"/></svg></span>
+        <h3>AI &amp; Data Science</h3>
+        <p>Multimodal data, machine learning, precision analytics.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <h3>Imaging &amp; Diagnostics</h3>
+        <p>OCT / OCT-A, fundus, ultrasound, portable imaging.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v5l-5 10a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3L14 7V2"/><path d="M7 15h10"/></svg></span>
+        <h3>Drug Delivery &amp; Biomaterials</h3>
+        <p>Sustained delivery, implants, depots, hydrogels, polymers.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-9 9-4 1 1-4z"/><path d="M12 5l7 7"/></svg></span>
+        <h3>Devices &amp; Surgery</h3>
+        <p>Handheld devices, minimally invasive surgery, robotics.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c6 3 6 6 12 3M6 21c6-3 6-6 12-3"/><path d="M6 3c-1 6 5 6 6 9 1 3-4 3-6 9M18 6c1-3-4-3-6-3"/></svg></span>
+        <h3>Proteomics &amp; Biomarkers</h3>
+        <p>Risk prediction, patient stratification, outcomes.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <h3>Clinical &amp; Global Implementation</h3>
+        <p>Implementation science, health systems, training &amp; scale.</p>
+      </div>
+      <div class="plat">
+        <span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+        <h3>Commercialization &amp; Entrepreneurship</h3>
+        <p>IP, licensing, startups, strategic partnerships, investor engagement.</p>
+      </div>
+      <div class="plat" style="background:var(--blue);color:#fff">
+        <span class="ic" style="color:var(--gold)" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".6"/></svg></span>
+        <h3 style="color:#fff">One integrated platform</h3>
+        <p style="color:var(--on-dark-mut)">Every capability, shared across the full portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNERS ===================== -->
+<section id="partners">
+  <div class="wrap">
+    <div class="sec-head prose reveal">
+      <div class="eyebrow">The Ecosystem</div>
+      <h2>A global partners ecosystem already in motion.</h2>
+      <p>World-leading eye-care systems, foundations, industry, and investors — the distribution and translation network that turns invention into reach.</p>
+    </div>
+
+    <div class="partners-grid reveal">
+      <div class="pgroup">
+        <div class="phead">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5"/><path d="M9 10h.01M15 10h.01"/></svg></span>
+          <h3>Eye Care Systems</h3>
+        </div>
+        <div class="plist">
+          <span class="chip">Aravind</span><span class="chip">LV Prasad</span><span class="chip">Sankara</span>
+          <span class="chip">Sadguru Netra Chikitsalaya</span><span class="chip">Dr. Shroff's</span>
+          <span class="chip">Mass Eye &amp; Ear</span><span class="chip">Bascom Palmer</span>
+        </div>
+      </div>
+
+      <div class="pgroup">
+        <div class="phead">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span>
+          <h3>Foundations</h3>
+        </div>
+        <div class="plist">
+          <span class="chip">Seva</span><span class="chip">Glaucoma Research</span>
+          <span class="chip">KeraLink</span><span class="chip">Orbis</span>
+        </div>
+      </div>
+
+      <div class="pgroup">
+        <div class="phead">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 15l-2 2-4-4 4-4 3 3M13 9l2-2 4 4-4 4-3-3"/></svg></span>
+          <h3>Industry Partners</h3>
+        </div>
+        <div class="plist">
+          <span class="chip">Aurolab</span><span class="chip">Alcon</span>
+          <span class="chip">Roche</span><span class="chip">AbbVie</span>
+        </div>
+      </div>
+
+      <div class="pgroup">
+        <div class="phead">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4-6 8-8 8-13a8 8 0 0 0-16 0c0 5 4 7 8 13z" opacity=".25"/><path d="M12 20V9M12 9c0-2-1.5-3.5-4-3.5M12 9c0-2 1.5-3.5 4-3.5"/></svg></span>
+          <h3>Investors</h3>
+        </div>
+        <div class="plist">
+          <span class="chip">Alcon Seed Fund</span><span class="chip">&amp; others</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLOSING (the ask) ===================== -->
+<section id="join" class="band-dark closing">
+  <div class="wrap reveal">
+    <div class="crest">
+      <svg width="34" height="34" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="15" cy="15" r="13" stroke="#c7a343" stroke-width="1.3" opacity=".7"/>
+        <circle cx="15" cy="15" r="8.5" stroke="#ffffff" stroke-width="1.3"/>
+        <circle cx="15" cy="15" r="3.4" fill="#ffffff"/>
+      </svg>
+      <span class="txt"><b>Johns Hopkins</b><span>Global Sight Initiative</span></span>
+    </div>
+    <div class="tagline">Science · Compassion · Impact</div>
+    <h2>Vision for all.</h2>
+    <p>
+      We are assembling the partners, foundations, and investors to translate this portfolio
+      from Hopkins benches to global reach — and to eliminate avoidable blindness in our lifetime.
+      There is a place in this mission for you.
+    </p>
+    <div class="closing-cta">
+      <a class="btn btn-gold" href="mailto:adi@visilant.org?subject=Partnering%20with%20the%20Global%20Sight%20Initiative">Partner &amp; invest &rarr;</a>
+      <a class="btn btn-outline-dark" href="#programs">Review the portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <span>&copy; 2026 Johns Hopkins Global Sight Initiative</span>
+    <span class="mono">Science. Compassion. Impact. Vision for All.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Scroll reveal ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- Stat count-up ---- */
+  var counters = document.querySelectorAll('[data-count]');
+  function animate(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var decimals = (target % 1 !== 0) ? 1 : 0;
+    if(reduce){ el.innerHTML = target.toFixed(decimals) + '<small>'+suffix+'</small>'; return; }
+    var start = null, dur = 1300;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      var val = (target*eased).toFixed(decimals);
+      el.innerHTML = val + '<small>'+suffix+'</small>';
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ animate(e.target); co.unobserve(e.target); }
+      });
+    },{threshold:.6});
+    counters.forEach(function(el){ co.observe(el); });
+  } else { counters.forEach(animate); }
+
+  /* ---- Hero iris / OCT-scan motif ---- */
+  var canvas = document.getElementById('iris');
+  if(canvas){
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    var W, H, cx, cy, R;
+    function resize(){
+      var r = canvas.getBoundingClientRect();
+      W = r.width; H = r.height;
+      canvas.width = W*dpr; canvas.height = H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      cx = W*0.80; cy = H*0.42;
+      R = Math.min(W,H)*0.62;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var t = 0;
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      var breathe = reduce ? 0 : Math.sin(t*0.012)*0.02;
+      var base = R*(1+breathe);
+
+      /* concentric OCT-like rings */
+      var rings = 26;
+      for(var i=0;i<rings;i++){
+        var rr = base*(i/rings);
+        ctx.beginPath();
+        ctx.arc(cx, cy, rr, 0, Math.PI*2);
+        var alpha = 0.05 * (1 - i/rings) + 0.015;
+        ctx.strokeStyle = 'rgba(0,45,114,'+alpha.toFixed(3)+')';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      /* iris fibers */
+      var spokes = 120;
+      for(var s=0;s<spokes;s++){
+        var ang = (s/spokes)*Math.PI*2 + (reduce?0:t*0.0006);
+        var inner = base*0.16;
+        var jitter = ((s*37)%13)/13;
+        var outer = base*(0.55 + jitter*0.42);
+        ctx.beginPath();
+        ctx.moveTo(cx+Math.cos(ang)*inner, cy+Math.sin(ang)*inner);
+        ctx.lineTo(cx+Math.cos(ang)*outer, cy+Math.sin(ang)*outer);
+        ctx.strokeStyle = 'rgba(47,111,237,'+(0.02+jitter*0.03).toFixed(3)+')';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      /* pupil glow */
+      var g = ctx.createRadialGradient(cx,cy,0,cx,cy,base*0.22);
+      g.addColorStop(0,'rgba(0,45,114,0.10)');
+      g.addColorStop(1,'rgba(0,45,114,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(cx,cy,base*0.22,0,Math.PI*2); ctx.fill();
+
+      if(!reduce){ t++; requestAnimationFrame(draw); }
+    }
+    draw();
+  }
+})();
+</script>
+</body>
+</html>
