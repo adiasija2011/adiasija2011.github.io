@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johns Hopkins Global Sight Initiative</title>
+<meta name="description" content="Johns Hopkins Global Sight Initiative — translational innovation to eliminate avoidable blindness and prevent visual impairment. Ten-plus technology programs across the full care continuum.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='31' fill='none' stroke='%23002D72' stroke-width='6'/><circle cx='50' cy='50' r='10' fill='%23002D72'/></svg>">
+<meta property="og:title" content="Johns Hopkins Global Sight Initiative">
+<meta property="og:description" content="Translational innovation to eliminate avoidable blindness and prevent visual impairment.">
+<meta name="theme-color" content="#002D72">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Johns Hopkins Global Sight Initiative — editorial statement
+   Type:  Newsreader (serif, voice) · Hanken Grotesk (function)
+          · IBM Plex Mono (labels, data)
+   Color: warm-neutral paper · warm-black ink · one Hopkins-blue accent
+   ============================================================ */
+:root{
+  --paper:#f4f4f1;
+  --ink:#15181d;
+  --body:#33373e;
+  --muted:#71757c;
+  --faint:#9a9ea5;
+  --line:#dcdcd4;
+  --line-soft:#e7e7df;
+  --blue:#002d72;        /* Johns Hopkins heritage — the single accent */
+  --blue-2:#1a4a9e;      /* link hover / brighter */
+  --midnight:#0b1b33;
+  --on-dark:#e9edf4;
+  --on-dark-mut:#8fa1c1;
+  --on-dark-line:rgba(233,237,244,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--blue);color:#fff}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--body);
+  font-family:'Newsreader',Charter,Georgia,serif;
+  font-size:20px;
+  line-height:1.62;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3{font-family:'Newsreader',Charter,Georgia,serif;color:var(--ink);font-weight:500;
+  letter-spacing:-.01em;line-height:1.1;text-wrap:balance}
+a{color:var(--blue);text-decoration:none;text-underline-offset:3px;
+  text-decoration-color:rgba(0,45,114,.32);transition:color .2s,text-decoration-color .2s}
+a:hover{color:var(--blue-2);text-decoration:underline;text-decoration-color:currentColor}
+
+/* --- shared type utilities --- */
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sans{font-family:'Hanken Grotesk',-apple-system,system-ui,sans-serif}
+.tnum{font-variant-numeric:tabular-nums}
+.label{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* --- layout --- */
+.doc{max-width:864px;margin:0 auto;padding:0 40px}
+.measure{max-width:37rem}          /* ~62ch reading column */
+section{padding:78px 0;border-top:1px solid var(--line)}
+.sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:34px;color:var(--muted)}
+.sec-eyebrow b{color:var(--blue);font-weight:500;margin-right:2px}
+.sec-title{font-size:clamp(28px,3.4vw,40px);line-height:1.12;margin-bottom:26px}
+.sec-intro{font-size:20px;color:var(--body);max-width:37rem}
+.sec-intro em{color:var(--ink)}
+
+/* --- scroll reveal (single, gentle) --- */
+.rise{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}
+.rise.in{opacity:1;transform:none}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-head{border-bottom:1px solid var(--line)}
+.site-head .doc{display:flex;align-items:center;justify-content:space-between;height:70px}
+.wordmark{display:flex;align-items:center;gap:12px;color:var(--ink)}
+.wordmark svg{flex-shrink:0}
+.wordmark .wm-t{font-family:'Newsreader',serif;font-weight:600;font-size:16px;line-height:1;letter-spacing:-.01em}
+.wordmark .wm-s{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);margin-top:3px;display:block}
+.head-link{font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:500;color:var(--ink);
+  text-decoration:none;text-decoration-color:transparent}
+.head-link:hover{color:var(--blue);text-decoration:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;border-top:none;padding:104px 0 88px;overflow:hidden}
+.hero-fundus{position:absolute;top:-6%;right:-8%;width:min(56vw,640px);height:min(56vw,640px);
+  z-index:0;pointer-events:none;opacity:.9}
+.hero .doc{position:relative;z-index:1}
+.hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--blue)}
+.hero h1{font-size:clamp(34px,5.6vw,60px);line-height:1.06;letter-spacing:-.02em;font-weight:500;
+  margin:26px 0 0;max-width:19ch;color:var(--ink)}
+.hero .mission{margin-top:30px;max-width:35rem;font-size:21px;line-height:1.58;color:var(--body)}
+.hero .mission b{color:var(--ink);font-weight:500}
+.hero .hero-link{display:inline-block;margin-top:34px;font-family:'Hanken Grotesk',sans-serif;
+  font-size:15px;font-weight:600;color:var(--blue)}
+
+/* ============================================================
+   STAT REGISTER (the burden)
+   ============================================================ */
+.stats{margin-top:52px;display:flex;flex-wrap:wrap;gap:56px}
+.stat{max-width:19rem}
+.stat .n{font-family:'Newsreader',serif;font-size:clamp(52px,7vw,84px);font-weight:500;
+  line-height:.94;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat .c{font-family:'Newsreader',serif;font-size:18px;line-height:1.45;color:var(--body);margin-top:14px}
+.stat .src{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;
+  color:var(--faint);margin-top:12px;text-transform:uppercase}
+.drivers{margin-top:52px;max-width:37rem}
+.drivers .label{margin-bottom:12px}
+.drivers p{font-family:'Newsreader',serif;font-size:20px;color:var(--body)}
+.drivers b{color:var(--ink);font-weight:500}
+
+/* ============================================================
+   PULL QUOTE (the opportunity)
+   ============================================================ */
+.pull{max-width:34rem}
+.pull .rule{width:44px;height:2px;background:var(--blue);margin-bottom:26px}
+.pull blockquote{font-family:'Newsreader',serif;font-size:clamp(24px,3.1vw,32px);line-height:1.32;
+  font-weight:400;color:var(--ink);letter-spacing:-.01em}
+.pull .attr{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+  color:var(--muted);margin-top:24px;text-transform:uppercase}
+
+/* ============================================================
+   NUMBERED LIST (pillars, journey)
+   ============================================================ */
+.list{border-top:1px solid var(--line-soft)}
+.item{display:grid;grid-template-columns:56px 1fr;gap:8px 26px;padding:26px 0;
+  border-bottom:1px solid var(--line-soft);align-items:baseline}
+.item .idx{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--blue);
+  padding-top:5px}
+.item h3{font-size:22px;line-height:1.2;font-weight:500;letter-spacing:-.01em}
+.item p{grid-column:2;font-family:'Hanken Grotesk',sans-serif;font-size:16px;line-height:1.55;
+  color:var(--body);margin-top:6px;max-width:38rem}
+.loop{grid-column:1 / -1;padding-top:22px;font-family:'Newsreader',serif;font-style:italic;
+  font-size:18px;color:var(--muted)}
+
+/* ============================================================
+   PROGRAM INDEX (the portfolio)
+   ============================================================ */
+.index{margin-top:48px;border-top:1px solid var(--line)}
+.prog{display:grid;grid-template-columns:15rem 1fr;gap:12px 44px;padding:30px 0;
+  border-bottom:1px solid var(--line);transition:background .2s ease}
+.prog:hover{background:rgba(0,45,114,.022)}
+.prog-id{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint)}
+.prog-name{font-family:'Newsreader',serif;font-size:24px;font-weight:500;line-height:1.15;
+  color:var(--ink);letter-spacing:-.01em;margin-top:8px}
+.prog-burden{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--blue);
+  margin-top:12px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.prog-detail dl{display:grid;grid-template-columns:auto 1fr;gap:5px 18px;align-items:baseline}
+.prog-detail dt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);padding-top:4px;white-space:nowrap}
+.prog-detail dd{font-family:'Hanken Grotesk',sans-serif;font-size:15.5px;line-height:1.5;color:var(--body)}
+.prog-detail dd.shift{font-family:'Newsreader',serif;font-style:italic;font-size:16.5px;color:var(--blue)}
+
+/* ============================================================
+   CAPABILITIES + PARTNERS (typographic lists)
+   ============================================================ */
+.deflist{border-top:1px solid var(--line-soft)}
+.def{display:grid;grid-template-columns:16rem 1fr;gap:6px 40px;padding:20px 0;
+  border-bottom:1px solid var(--line-soft);align-items:baseline}
+.def dt{font-family:'Hanken Grotesk',sans-serif;font-size:16px;font-weight:600;color:var(--ink)}
+.def dd{font-family:'Hanken Grotesk',sans-serif;font-size:15.5px;line-height:1.5;color:var(--body)}
+
+.partners{border-top:1px solid var(--line-soft)}
+.pgroup{display:grid;grid-template-columns:14rem 1fr;gap:6px 40px;padding:22px 0;
+  border-bottom:1px solid var(--line-soft);align-items:baseline}
+.pgroup .label{color:var(--blue);align-self:start;padding-top:3px}
+.pgroup .names{font-family:'Newsreader',serif;font-size:19px;line-height:1.5;color:var(--ink)}
+.pgroup .names span{color:var(--faint)}
+
+/* ============================================================
+   CLOSING (dark) + SIGNATURE
+   ============================================================ */
+.closing{background:var(--midnight);color:var(--on-dark);border-top:none;padding:104px 0}
+.closing .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--on-dark-mut);margin-bottom:28px}
+.closing h2{font-size:clamp(30px,4.2vw,48px);line-height:1.1;color:#fff;max-width:16ch}
+.closing p{font-family:'Newsreader',serif;font-size:20px;line-height:1.6;color:var(--on-dark-mut);
+  max-width:34rem;margin-top:26px}
+.closing p b{color:#fff;font-weight:500}
+.closing .invite{display:inline-block;margin-top:34px;font-family:'Hanken Grotesk',sans-serif;
+  font-size:16px;font-weight:600;color:#fff;text-decoration-color:rgba(255,255,255,.4)}
+.closing .invite:hover{color:#fff;text-decoration-color:#fff}
+.sign{margin-top:64px;padding-top:30px;border-top:1px solid var(--on-dark-line);max-width:34rem}
+.sign .who{font-family:'Newsreader',serif;font-size:18px;color:var(--on-dark)}
+.sign .where{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+  color:var(--on-dark-mut);margin-top:8px;text-transform:uppercase}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:var(--midnight);border-top:1px solid var(--on-dark-line);padding:26px 0 40px}
+.foot .doc{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot span{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;color:var(--on-dark-mut)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:720px){
+  body{font-size:18px}
+  .doc{padding:0 24px}
+  section{padding:56px 0}
+  .hero{padding:64px 0 56px}
+  .hero-fundus{opacity:.5;right:-24%;top:2%}
+  .stats{gap:40px}
+  .prog{grid-template-columns:1fr;gap:16px}
+  .prog-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .prog-name{margin-top:2px}
+  .prog-burden{margin-top:2px}
+  .def{grid-template-columns:1fr;gap:4px}
+  .pgroup{grid-template-columns:1fr;gap:8px}
+  .item{grid-template-columns:40px 1fr;gap:6px 18px}
+  .item p{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-head">
+  <div class="doc">
+    <a class="wordmark" href="#top" aria-label="Johns Hopkins Global Sight Initiative">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <circle cx="13" cy="13" r="12" stroke="#002d72" stroke-width="1.2" opacity=".4"/>
+        <circle cx="13" cy="13" r="7.4" stroke="#002d72" stroke-width="1.2"/>
+        <circle cx="13" cy="13" r="2.9" fill="#002d72"/>
+      </svg>
+      <span class="wm"><span class="wm-t">Global Sight Initiative</span><span class="wm-s">Johns Hopkins</span></span>
+    </a>
+    <a class="head-link" href="#invitation">Partner &amp; invest</a>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <canvas class="hero-fundus" id="fundus" aria-hidden="true"></canvas>
+  <div class="doc">
+    <div class="eyebrow">Johns Hopkins Global Sight Initiative</div>
+    <h1>Translational innovation to eliminate avoidable blindness and prevent visual impairment.</h1>
+    <p class="mission">
+      <b>Our mission is to unite science, technology, and global partners</b> — to find patients,
+      restore sight, replace burdensome care, and scale the solutions that eliminate avoidable blindness.
+    </p>
+    <a class="hero-link" href="#invitation">Partner with the initiative &rarr;</a>
+  </div>
+</section>
+
+<!-- ===================== 01 · THE BURDEN ===================== -->
+<section id="burden">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>01</b> &nbsp;/&nbsp; The burden</div>
+    <h2 class="sec-title measure">Most blindness is not inevitable. It is a problem of scale.</h2>
+    <p class="sec-intro">
+      The challenge is reaching people before disease becomes irreversible — in the places
+      where specialists are fewest and the burden is heaviest.
+    </p>
+
+    <div class="stats">
+      <div class="stat rise">
+        <div class="n tnum">2.2<span style="font-size:.42em;letter-spacing:0"> billion</span></div>
+        <div class="c">people live with a vision impairment worldwide.</div>
+        <div class="src">WHO World Report on Vision</div>
+      </div>
+      <div class="stat rise">
+        <div class="n tnum">1<span style="font-size:.42em;letter-spacing:0"> billion</span></div>
+        <div class="c">of those cases could have been prevented, or remain unaddressed.</div>
+        <div class="src">WHO World Report on Vision</div>
+      </div>
+    </div>
+
+    <div class="drivers rise">
+      <div class="label">What is driving it</div>
+      <p>
+        <b>Aging populations. Rising chronic eye disease. Widening gaps in access and workforce.</b>
+        And the cost of the infrastructure that eye care has always required.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 · THE OPPORTUNITY ===================== -->
+<section id="opportunity">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>02</b> &nbsp;/&nbsp; The opportunity</div>
+    <div class="pull rise">
+      <div class="rule"></div>
+      <blockquote>
+        Technology can extend expertise, simplify care, improve durability, and scale to the
+        size of the need — turning specialist-dependent medicine into care that reaches everyone.
+      </blockquote>
+      <div class="attr">Transformative potential</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 · OUR APPROACH ===================== -->
+<section id="approach">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>03</b> &nbsp;/&nbsp; Our approach</div>
+    <h2 class="sec-title measure">Four integrated pillars, one care continuum.</h2>
+    <p class="sec-intro" style="margin-bottom:38px">
+      Each pillar attacks a different failure point — from finding the patient to scaling the cure.
+    </p>
+
+    <div class="list">
+      <div class="item rise">
+        <div class="idx">01</div>
+        <h3>Find patients &amp; connect to care</h3>
+        <p>AI-enabled screening, clinical decision support, referral tracking, disease monitoring, and precision prognosis.</p>
+      </div>
+      <div class="item rise">
+        <div class="idx">02</div>
+        <h3>Democratize sight-restoring procedures</h3>
+        <p>Make cataract surgery, corneal restoration, infection treatment, and postoperative care simpler, safer, longer-lasting, and less dependent on infrastructure.</p>
+      </div>
+      <div class="item rise">
+        <div class="idx">03</div>
+        <h3>Replace burdensome chronic care</h3>
+        <p>Deliver durable therapy for glaucoma, diabetic retinal disease, AMD, myopia, and other progressive conditions — reducing or eliminating repeated visits, injections, and drops.</p>
+      </div>
+      <div class="item rise">
+        <div class="idx">04</div>
+        <h3>Validate, translate, commercialize &amp; scale</h3>
+        <p>Coordinate clinical validation, regulatory and manufacturing planning, and engagement with foundations, industry, and investors to scale impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · THE PORTFOLIO ===================== -->
+<section id="portfolio">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>04</b> &nbsp;/&nbsp; The portfolio</div>
+    <h2 class="sec-title measure">Addressing the leading causes of blindness.</h2>
+    <p class="sec-intro">
+      Ten-plus technology programs span the full care continuum. Each pairs a defined global
+      burden with a translational solution built to change the standard of care.
+    </p>
+
+    <div class="index">
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 01</div>
+          <div class="prog-name">Detection, triage &amp; referral</div>
+          <div class="prog-burden">2.2B with vision impairment</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Specialist-dependent exams cannot scale to volume, geography, or chronicity; many patients never reach a specialist.</dd>
+          <dt>Building</dt><dd>AI-enabled portable imaging, triage, referral tracking, decision support, and longitudinal monitoring.</dd>
+          <dt>The shift</dt><dd class="shift">Specialist-level decision support, extended beyond the clinic.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 02</div>
+          <div class="prog-name">Myopia &amp; refractive disease</div>
+          <div class="prog-burden">50% of the world by 2050</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Behavior change, atropine, or specialty lenses all require long-term adherence.</dd>
+          <dt>Building</dt><dd>Scalable topical myopia treatment paired with AI-enabled screening and monitoring.</dd>
+          <dt>The shift</dt><dd class="shift">Reaching a population-level epidemic before irreversible complications develop.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 03</div>
+          <div class="prog-name">Cataract</div>
+          <div class="prog-burden">17M blind · 83.5M with MSVI</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Surgery requires capital equipment, trained specialists, and cost.</dd>
+          <dt>Building</dt><dd>Pharmacologic therapy to treat cataract, and a low-cost handheld surgical device.</dd>
+          <dt>The shift</dt><dd class="shift">Cataract treatment made simpler, cheaper, and more accessible.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 04</div>
+          <div class="prog-name">Corneal blindness</div>
+          <div class="prog-burden">12.7M need a transplant</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Donor scarcity, complex surgery, rejection, and intensive topical dosing.</dd>
+          <dt>Building</dt><dd>Synthetic tissue and simplified, non-specialist surgery; sustained anti-infective depots.</dd>
+          <dt>The shift</dt><dd class="shift">Less dependence on donor tissue, specialists, and adherence-intensive therapy.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 05</div>
+          <div class="prog-name">Postoperative infection &amp; inflammation</div>
+          <div class="prog-burden">Tens of millions of surgeries</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Multi-drop regimens are poorly adhered to — and the patients least able to administer drops are most at risk of infection and inflammation.</dd>
+          <dt>Building</dt><dd>Drop-free, surgeon-administered, sustained antibiotic and steroid depots.</dd>
+          <dt>The shift</dt><dd class="shift">Postoperative pharmacotherapy turned from an adherence problem into controlled care.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 06</div>
+          <div class="prog-name">Glaucoma prognosis &amp; treatment</div>
+          <div class="prog-burden">80M today · 112M by 2040</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Slow detection; drops need lifelong adherence; surgery is short-lived; vision loss is irreversible.</dd>
+          <dt>Building</dt><dd>AI-enabled prognosis, topical neuroprotection, sustained IOP lowering, and programmable surgery.</dd>
+          <dt>The shift</dt><dd class="shift">From delayed detection to prognosis, durable IOP control, and neuroprotection.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 07</div>
+          <div class="prog-name">Diabetic retinal disease</div>
+          <div class="prog-burden">103M adults, rising globally</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Anti-VEGF injections require 6–12 per year for years, with high cost and adherence burden.</dd>
+          <dt>Building</dt><dd>A one-time phototherapy implant targeting rod oxygen demand, retinal hypoxia, and VEGF signaling.</dd>
+          <dt>The shift</dt><dd class="shift">From repeated rescue injections to a long-duration implant targeting upstream biology.</dd>
+        </dl></div>
+      </article>
+
+      <article class="prog rise">
+        <div class="prog-head">
+          <div class="prog-id">Program 08</div>
+          <div class="prog-name">Age-related macular degeneration</div>
+          <div class="prog-burden">196M today · 288M by 2040</div>
+        </div>
+        <div class="prog-detail"><dl>
+          <dt>Today</dt><dd>Dry AMD has limited options; wet AMD requires lifelong injections. It is a leading cause of central vision loss.</dd>
+          <dt>Building</dt><dd>AI-designed, sustained topical retinal delivery systems.</dd>
+          <dt>The shift</dt><dd class="shift">Repeated injections replaced with earlier, less invasive, more durable therapy.</dd>
+        </dl></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 · FROM BENCH TO BEDSIDE ===================== -->
+<section id="journey">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>05</b> &nbsp;/&nbsp; From bench to bedside</div>
+    <h2 class="sec-title measure">The innovation and impact journey.</h2>
+    <p class="sec-intro" style="margin-bottom:38px">
+      A disciplined path from unmet need to global impact — with data, outcomes, and feedback
+      feeding back into every stage.
+    </p>
+
+    <div class="list">
+      <div class="item rise"><div class="idx">01</div><h3>Need identification &amp; prioritization</h3><p>Global burden assessment, patient and partner input, and technical feasibility.</p></div>
+      <div class="item rise"><div class="idx">02</div><h3>Discovery &amp; invention</h3><p>AI, nanomedicine, biomaterials, photonics, imaging, and proteomics.</p></div>
+      <div class="item rise"><div class="idx">03</div><h3>Engineering &amp; prototyping</h3><p>Human-centered design, device engineering, formulation, benchtop and preclinical testing.</p></div>
+      <div class="item rise"><div class="idx">04</div><h3>Clinical validation</h3><p>Prospective studies, real-world evidence, and multisite, global care-system validation.</p></div>
+      <div class="item rise"><div class="idx">05</div><h3>Translation &amp; scale</h3><p>Regulatory strategy, manufacturing, quality, supply chain, and cost optimization.</p></div>
+      <div class="item rise"><div class="idx">06</div><h3>Implementation &amp; access</h3><p>Training, integration, reimbursement, policy, and sustainable delivery models.</p></div>
+      <div class="item rise"><div class="idx">07</div><h3>Impact</h3><p>Prevent blindness, restore sight, improve lives, and empower communities.</p></div>
+      <div class="loop rise">A continuous learning loop — data, outcomes, and feedback drive iteration and improvement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 · CAPABILITIES ===================== -->
+<section id="capabilities">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>06</b> &nbsp;/&nbsp; Enabling platforms</div>
+    <h2 class="sec-title measure">The shared engine behind the portfolio.</h2>
+    <p class="sec-intro" style="margin-bottom:38px">
+      Scientific infrastructure that every program draws on — the reason a portfolio, rather
+      than a single product, can move at once.
+    </p>
+
+    <dl class="deflist">
+      <div class="def rise"><dt>AI &amp; Data Science</dt><dd>Multimodal data, machine learning, precision analytics.</dd></div>
+      <div class="def rise"><dt>Imaging &amp; Diagnostics</dt><dd>OCT / OCT-A, fundus, ultrasound, and portable imaging.</dd></div>
+      <div class="def rise"><dt>Drug Delivery &amp; Biomaterials</dt><dd>Sustained delivery, implants, depots, hydrogels, polymers.</dd></div>
+      <div class="def rise"><dt>Devices &amp; Surgery</dt><dd>Handheld devices, minimally invasive surgery, robotics.</dd></div>
+      <div class="def rise"><dt>Proteomics &amp; Biomarkers</dt><dd>Risk prediction, patient stratification, outcomes.</dd></div>
+      <div class="def rise"><dt>Clinical &amp; Global Implementation</dt><dd>Implementation science, health systems, training and scale.</dd></div>
+      <div class="def rise"><dt>Commercialization &amp; Entrepreneurship</dt><dd>IP, licensing, startups, strategic partnerships, investor engagement.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ===================== 07 · PARTNERS ===================== -->
+<section id="partners">
+  <div class="doc">
+    <div class="sec-eyebrow"><b>07</b> &nbsp;/&nbsp; The ecosystem</div>
+    <h2 class="sec-title measure">A global partners ecosystem, already in motion.</h2>
+    <p class="sec-intro" style="margin-bottom:38px">
+      World-leading eye-care systems, foundations, industry, and investors — the network that
+      turns invention into reach.
+    </p>
+
+    <div class="partners">
+      <div class="pgroup rise">
+        <div class="label">Eye care systems</div>
+        <div class="names">Aravind &nbsp;<span>·</span>&nbsp; LV Prasad &nbsp;<span>·</span>&nbsp; Sankara &nbsp;<span>·</span>&nbsp; Sadguru Netra Chikitsalaya &nbsp;<span>·</span>&nbsp; Dr. Shroff's &nbsp;<span>·</span>&nbsp; Mass Eye &amp; Ear &nbsp;<span>·</span>&nbsp; Bascom Palmer</div>
+      </div>
+      <div class="pgroup rise">
+        <div class="label">Foundations</div>
+        <div class="names">Seva &nbsp;<span>·</span>&nbsp; Glaucoma Research &nbsp;<span>·</span>&nbsp; KeraLink &nbsp;<span>·</span>&nbsp; Orbis</div>
+      </div>
+      <div class="pgroup rise">
+        <div class="label">Industry</div>
+        <div class="names">Aurolab &nbsp;<span>·</span>&nbsp; Alcon &nbsp;<span>·</span>&nbsp; Roche &nbsp;<span>·</span>&nbsp; AbbVie</div>
+      </div>
+      <div class="pgroup rise">
+        <div class="label">Investors</div>
+        <div class="names">Alcon Seed Fund &nbsp;<span>·</span>&nbsp; <span>and others</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INVITATION (dark) ===================== -->
+<section id="invitation" class="closing">
+  <div class="doc">
+    <div class="eyebrow">Vision for all</div>
+    <h2>There is a place in this mission for you.</h2>
+    <p>
+      We are assembling the partners, foundations, and investors to translate this portfolio
+      from Hopkins benches to global reach — and to <b>eliminate avoidable blindness in our lifetime.</b>
+    </p>
+    <a class="invite" href="mailto:adi@visilant.org?subject=Partnering%20with%20the%20Global%20Sight%20Initiative">Partner &amp; invest &rarr;</a>
+
+    <div class="sign">
+      <div class="who">The Johns Hopkins Global Sight Initiative</div>
+      <div class="where">Baltimore, Maryland &nbsp;·&nbsp; Science. Compassion. Impact.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="doc">
+    <span>© 2026 Johns Hopkins Global Sight Initiative</span>
+    <span>Vision for all.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- gentle single reveal ---- */
+  var rises = document.querySelectorAll('.rise');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.1, rootMargin:'0px 0px -6% 0px'});
+    rises.forEach(function(el){ io.observe(el); });
+  } else { rises.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* ---- Hero motif: a retinal fundus vasculature drawing, rendered once, static.
+         Deterministic (seeded) so it never animates or shifts. ---- */
+  var canvas = document.getElementById('fundus');
+  if(canvas){
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    // simple seeded PRNG (mulberry32) — no Math.random, fully deterministic
+    function mk(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; var t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+    function render(){
+      var r = canvas.getBoundingClientRect();
+      var W=r.width, H=r.height;
+      canvas.width=W*dpr; canvas.height=H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,W,H);
+      var cx=W*0.5, cy=H*0.5, R=Math.min(W,H)*0.46;
+      // faint outer disc
+      ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
+      ctx.strokeStyle='rgba(0,45,114,0.10)'; ctx.lineWidth=1; ctx.stroke();
+      // optic disc (vessels emanate from here, offset like a real fundus)
+      var ox=cx+R*0.22, oy=cy-R*0.05;
+      // recursive vessel tree
+      function vessel(x,y,ang,len,width,rnd,depth){
+        if(depth>6 || len<6) return;
+        var steps=6, nx=x, ny=y, a=ang;
+        ctx.beginPath(); ctx.moveTo(x,y);
+        for(var i=0;i<steps;i++){
+          a += (rnd()-0.5)*0.5;
+          nx += Math.cos(a)*(len/steps);
+          ny += Math.sin(a)*(len/steps);
+          ctx.lineTo(nx,ny);
+        }
+        ctx.strokeStyle='rgba(0,45,114,'+(0.05+width*0.012).toFixed(3)+')';
+        ctx.lineWidth=Math.max(0.4,width);
+        ctx.lineCap='round';
+        ctx.stroke();
+        var branches = depth<2?3:2;
+        for(var b=0;b<branches;b++){
+          vessel(nx,ny, a+(rnd()-0.5)*1.1, len*(0.62+rnd()*0.2), width*0.66, rnd, depth+1);
+        }
+      }
+      // four main arcades, like the superior/inferior temporal & nasal vessels
+      var baseAngles=[2.5,3.7,0.5,-0.6];
+      baseAngles.forEach(function(a,i){
+        vessel(ox,oy,a, R*0.5, 2.4, mk(101+i*57), 0);
+      });
+      // optic disc glow
+      var g=ctx.createRadialGradient(ox,oy,0,ox,oy,R*0.12);
+      g.addColorStop(0,'rgba(0,45,114,0.08)'); g.addColorStop(1,'rgba(0,45,114,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,R*0.12,0,Math.PI*2); ctx.fill();
+    }
+    render();
+    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(render,180); });
+  }
+})();
+</script>
+</body>
+</html>
