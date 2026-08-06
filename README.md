@@ -9,7 +9,6 @@ Feel free to explore my projects and reach out if you share similar interests or
 
 ## 🌐 Connect with Me
 
-- **Email:** [adiasija@gmail.com](mailto:adiasija@gmail.com)
 - **LinkedIn:** [Adi Asija](https://www.linkedin.com/in/adi-asija)
 - **GitHub:** [adiasija2011](https://github.com/adiasija2011)
 
